@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AheadMark — Trend Intelligence for Marketing Agencies</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600;700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f5f0;
+    --bg-dark: #1a1814;
+    --ink: #1a1814;
+    --ink-light: #6b6560;
+    --accent: #2d5a3d;
+    --accent-light: #4a8c63;
+    --accent-pale: #e8f0eb;
+    --line: rgba(26,24,20,0.12);
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Outfit', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 100;
+    padding: 24px 64px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(247,245,240,0.95);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+    letter-spacing: 0.02em;
+  }
+
+  .logo span { color: var(--accent); }
+
+  nav a.cta-nav {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--white);
+    text-decoration: none;
+    background: var(--accent);
+    padding: 12px 28px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+  }
+
+  nav a.cta-nav:hover { background: var(--accent-light); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-top: 80px;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    padding: 100px 64px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+  }
+
+  .hero-right {
+    background: var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 30% 40%, rgba(255,255,255,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 80% at 80% 80%, rgba(0,0,0,0.2) 0%, transparent 60%);
+  }
+
+  .hero-right-content {
+    position: relative;
+    z-index: 2;
+    padding: 60px;
+    text-align: center;
+  }
+
+  .hero-big-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    font-weight: 300;
+    color: rgba(255,255,255,0.12);
+    line-height: 0.9;
+    letter-spacing: -0.03em;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .hero-card {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.15);
+    padding: 40px;
+    text-align: left;
+    position: relative;
+    z-index: 3;
+    backdrop-filter: blur(4px);
+  }
+
+  .hero-card-label {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    margin-bottom: 20px;
+  }
+
+  .hero-card-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--white);
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+
+  .hero-card-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.65);
+  }
+
+  .hero-card-divider {
+    height: 1px;
+    background: rgba(255,255,255,0.15);
+    margin: 24px 0;
+  }
+
+  .hero-card-stat {
+    display: flex;
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .stat-item { text-align: center; }
+
+  .stat-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--white);
+    line-height: 1;
+  }
+
+  .stat-desc {
+    font-size: 11px;
+    color: rgba(255,255,255,0.5);
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+
+  .hero-tag {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .hero-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(44px, 5vw, 72px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 28px;
+    color: var(--ink);
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .hero-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-light);
+    max-width: 460px;
+    margin-bottom: 48px;
+  }
+
+  .hero-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: var(--ink);
+    color: var(--white);
+    text-decoration: none;
+    padding: 16px 36px;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+  }
+
+  .hero-cta:hover { background: var(--accent); }
+
+  /* SECTIONS */
+  .section {
+    padding: 120px 64px;
+  }
+
+  .section-tag {
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-tag::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 4vw, 56px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 20px;
+  }
+
+  h2 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .section-desc {
+    font-size: 16px;
+    line-height: 1.8;
+    color: var(--ink-light);
+    max-width: 520px;
+  }
+
+  /* DIVIDER */
+  .divider {
+    height: 1px;
+    background: var(--line);
+    margin: 0 64px;
+  }
+
+  /* WHAT WE DELIVER */
+  .deliver-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2px;
+    margin-top: 64px;
+  }
+
+  .deliver-card {
+    background: var(--white);
+    border: 1px solid var(--line);
+    padding: 52px 48px;
+    position: relative;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .deliver-card::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 3px;
+    height: 0;
+    background: var(--accent);
+    transition: height 0.4s ease;
+  }
+
+  .deliver-card:hover::after { height: 100%; }
+  .deliver-card:hover { background: var(--accent-pale); }
+
+  .deliver-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 700;
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .deliver-text {
+    font-size: 15px;
+    line-height: 1.7;
+    color: var(--ink-light);
+  }
+
+  /* HOW */
+  .how-section {
+    padding: 120px 64px;
+    background: var(--ink);
+    color: var(--white);
+  }
+
+  .how-section .section-tag { color: rgba(255,255,255,0.4); }
+  .how-section .section-tag::before { background: rgba(255,255,255,0.4); }
+  .how-section h2 { color: var(--white); }
+  .how-section h2 em { color: rgba(255,255,255,0.4); font-style: italic; }
+
+  .timeline {
+    margin-top: 72px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255,255,255,0.1);
+  }
+
+  .timeline-item {
+    padding: 60px 40px 40px;
+    border-right: 1px solid rgba(255,255,255,0.07);
+    position: relative;
+  }
+
+  .timeline-item:last-child { border-right: none; }
+
+  .timeline-dot {
+    width: 10px;
+    height: 10px;
+    background: var(--accent-light);
+    border-radius: 50%;
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .timeline-num {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.3);
+    letter-spacing: 0.2em;
+    margin-bottom: 16px;
+  }
+
+  .timeline-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 700;
+    color: var(--white);
+    margin-bottom: 14px;
+    line-height: 1.2;
+  }
+
+  .timeline-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* FOR WHOM */
+  .for-section {
+    padding: 120px 64px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .for-list {
+    list-style: none;
+    margin-top: 40px;
+  }
+
+  .for-list li {
+    padding: 20px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 16px;
+    color: var(--ink-light);
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    line-height: 1.5;
+  }
+
+  .for-list li::before {
+    content: '→';
+    color: var(--accent);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .for-image {
+    background: var(--accent-pale);
+    border: 1px solid rgba(45,90,61,0.15);
+    padding: 60px 48px;
+    position: relative;
+  }
+
+  .for-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--ink);
+    margin-bottom: 32px;
+  }
+
+  .for-quote em { color: var(--accent); font-style: italic; }
+
+  .for-tag {
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    background: rgba(45,90,61,0.1);
+    padding: 8px 16px;
+    display: inline-block;
+  }
+
+  /* CTA */
+  .cta-section {
+    padding: 120px 64px;
+    background: var(--accent);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: 'AHEAD';
+    position: absolute;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 300px;
+    font-weight: 700;
+    color: rgba(255,255,255,0.04);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    white-space: nowrap;
+    user-select: none;
+  }
+
+  .cta-section h2 {
+    color: var(--white);
+    font-size: clamp(36px, 4vw, 56px);
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 0 auto 20px;
+  }
+
+  .cta-section p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.65);
+    margin-bottom: 48px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-email {
+    display: inline-block;
+    font-size: 12px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    text-decoration: none;
+    background: var(--white);
+    padding: 18px 48px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 2;
+  }
+
+  .cta-email:hover { background: var(--bg); }
+
+  /* FOOTER */
+  footer {
+    padding: 36px 64px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--bg);
+  }
+
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .footer-logo span { color: var(--accent); }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--ink-light);
+  }
+
+  .footer-email {
+    font-size: 13px;
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  /* ANIMATIONS */
+  .fade-up {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .fade-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .hero-left {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideRight 0.9s ease forwards 0.2s;
+  }
+
+  .hero-right {
+    opacity: 0;
+    transform: translateX(20px);
+    animation: slideLeft 0.9s ease forwards 0.4s;
+  }
+
+  @keyframes slideRight {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes slideLeft {
+    to { opacity: 1; transform: translateX(0); }
+  }
+
+  @media (max-width: 900px) {
+    nav { padding: 20px 24px; }
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { min-height: 400px; }
+    .hero-left { padding: 80px 24px 60px; }
+    .section { padding: 80px 24px; }
+    .divider { margin: 0 24px; }
+    .deliver-grid { grid-template-columns: 1fr; }
+    .how-section { padding: 80px 24px; }
+    .timeline { grid-template-columns: 1fr; }
+    .timeline-item { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); }
+    .for-section { grid-template-columns: 1fr; padding: 80px 24px; gap: 48px; }
+    .cta-section { padding: 80px 24px; }
+    footer { padding: 28px 24px; flex-direction: column; gap: 12px; text-align: center; }
+    .hero-big-text { font-size: 60px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="#" class="logo">Ahead<span>Mark</span></a>
+  <a href="mailto:team@aheadmark.com" class="cta-nav">Get in Touch</a>
+</nav>
+
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-tag">Trend Intelligence for Agencies</div>
+    <h1>Know What's<br>Coming <em>Before</em><br>Your Clients Do</h1>
+    <p class="hero-desc">We monitor consumer behavior patterns and deliver actionable trend intelligence to marketing agencies — so you always know where to shift focus, and where to stop investing.</p>
+    <a href="mailto:team@aheadmark.com" class="hero-cta">
+      Start Working Together →
+    </a>
+  </div>
+  <div class="hero-right">
+    <div class="hero-big-text">TREND</div>
+    <div class="hero-right-content">
+      <div class="hero-card">
+        <div class="hero-card-label">What you receive</div>
+        <div class="hero-card-title">Intelligence That Moves<br>With the Market</div>
+        <p class="hero-card-text">Trend reports delivered as patterns shift — not on a fixed schedule. When the market moves, you know first.</p>
+        <div class="hero-card-divider"></div>
+        <div class="hero-card-stat">
+          <div class="stat-item">
+            <div class="stat-value">Real</div>
+            <div class="stat-desc">Time signals</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">AI</div>
+            <div class="stat-desc">Powered analysis</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">Ready</div>
+            <div class="stat-desc">To use content</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="section">
+  <div class="section-tag">What We Deliver</div>
+  <h2>Two Things Your Agency<br>Needs to Stay <em>Relevant</em></h2>
+  <p class="section-desc">We do not send reports on a schedule. We send intelligence when there is something worth acting on — and we package it so your team can use it immediately.</p>
+
+  <div class="deliver-grid">
+    <div class="deliver-card fade-up">
+      <div class="deliver-title">Trend Intelligence Reports</div>
+      <p class="deliver-text">We track shifts in consumer behavior across social platforms, search data, and community signals. When a meaningful pattern emerges, you receive a report — what is rising, what is fading, and what your clients should do about it.</p>
+    </div>
+    <div class="deliver-card fade-up">
+      <div class="deliver-title">Ready-to-Send Client Emails</div>
+      <p class="deliver-text">Every report comes with client-facing email templates you can send under your own brand. No editing required. Your clients receive strategic guidance — and you receive the credit for staying ahead.</p>
+    </div>
+  </div>
+</section>
+
+<section class="how-section">
+  <div class="section-tag">How It Works</div>
+  <h2>Simple by Design,<br><em>Powerful</em> in Practice</h2>
+
+  <div class="timeline">
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-num">01</div>
+      <div class="timeline-title">We Monitor the Market</div>
+      <p class="timeline-text">Our AI systems continuously analyze consumer behavior patterns — tracking what audiences engage with, what they search for, and where their attention is shifting.</p>
+    </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-num">02</div>
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">We Identify What Matters</div>
+      <p class="timeline-text">Not every signal is a trend. We apply a multi-framework analysis to separate meaningful shifts from noise — and translate them into clear strategic direction.</p>
+    </div>
+    <div class="timeline-item fade-up">
+      <div class="timeline-dot"></div>
+      <div class="timeline-num">03</div>
+      <div class="timeline-title">You Receive & Deploy</div>
+      <p class="timeline-text">You receive a trend report with ready-to-use client emails. Forward them, schedule them, or adapt them — the intelligence is yours to use however you see fit.</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<section class="for-section">
+  <div class="fade-up">
+    <div class="section-tag">Who It's For</div>
+    <h2>Built for Agencies<br>That Work in <em>Niche</em> Markets</h2>
+    <p class="section-desc" style="margin-bottom: 0;">AheadMark is designed for boutique marketing agencies that serve clients in fast-moving consumer categories — where staying current is not optional.</p>
+    <ul class="for-list">
+      <li>Agencies serving DTC brands in specialty food and beverage</li>
+      <li>Teams managing content and email for wellness and lifestyle brands</li>
+      <li>Agencies whose clients ask "what should we be talking about right now?"</li>
+      <li>Teams that want to lead client conversations, not react to them</li>
+    </ul>
+  </div>
+  <div class="for-image fade-up">
+    <p class="for-quote">"Your clients do not need more content. They need the <em>right</em> content at the <em>right</em> moment."</p>
+    <span class="for-tag">AheadMark Intelligence</span>
+  </div>
+</section>
+
+<section class="cta-section">
+  <h2>Ready to Stay<br>Ahead of the Market?</h2>
+  <p>Let's talk about your agency and how AheadMark can support your clients.</p>
+  <a href="mailto:team@aheadmark.com" class="cta-email">team@aheadmark.com</a>
+</section>
+
+<footer>
+  <a href="#" class="footer-logo">Ahead<span>Mark</span></a>
+  <span class="footer-copy">© 2026 AheadMark. All rights reserved.</span>
+  <a href="mailto:team@aheadmark.com" class="footer-email">team@aheadmark.com</a>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 120);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
